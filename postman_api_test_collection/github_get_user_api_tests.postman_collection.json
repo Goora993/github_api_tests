@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "52360e15-b189-4c5b-a53e-5a28e35186a1",
+		"name": "Github Get User API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users/octocat",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"user\", \"octocat\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name is 'OK'\", () => {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"pm.test(\"User is Octocat\", () => {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.login).to.eql(\"octocat\");",
+							"    pm.expect(responseJson.type).to.eql(\"User\");",
+							"    pm.expect(responseJson.name).to.eql(\"The Octocat\");",
+							"    pm.environment.set(\"name\", responseJson.name);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.github.com/users/{{user}}",
+					"host": [
+						"api",
+						"github",
+						"com"
+					],
+					"path": [
+						"users",
+						"{{user}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
