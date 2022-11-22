@@ -23,7 +23,7 @@ public class GetUserApiTest {
     }
 
     @Test
-    public void notFoundUserReturns404() {
+    public void notFoundRequestReturns404() {
         int statusCode = new GetUserApiRequest()
                 .user(NOT_EXISTING_USER)
                 .sendRequest()
