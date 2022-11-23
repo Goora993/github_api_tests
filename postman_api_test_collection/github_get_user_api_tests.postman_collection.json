@@ -21,6 +21,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"const responseJson = pm.response.json();",
+							"",
 							"pm.test(\"Status code is 200\", () => {",
 							"    pm.response.to.have.status(200);",
 							"});",
@@ -30,12 +32,14 @@
 							"});",
 							"",
 							"pm.test(\"User is Octocat\", () => {",
-							"    const responseJson = pm.response.json();",
 							"    pm.expect(responseJson.login).to.eql(\"octocat\");",
 							"    pm.expect(responseJson.type).to.eql(\"User\");",
 							"    pm.expect(responseJson.name).to.eql(\"The Octocat\");",
-							"    pm.environment.set(\"name\", responseJson.name);",
 							"});",
+							"",
+							"pm.environment.set(\"name\", responseJson.name);",
+							"",
+							"",
 							""
 						],
 						"type": "text/javascript"
